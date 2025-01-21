@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Head2 from "../atoms/Head2";
 import { supabase } from "../../../utils/supabaseClient";
+import Link from "next/link";
 
 const Page = () => {
   const [username, setUsername] = useState("");
@@ -111,6 +112,12 @@ const Page = () => {
             サインイン
           </a>
         </div>
+        <Link
+          href="/"
+          className="text-blue-500 underline hover:text-blue-600 transition duration-200 text-center block mt-4"
+        >
+          ホームへ戻る
+        </Link>
       </div>
     </div>
   );

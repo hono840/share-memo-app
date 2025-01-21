@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { supabase } from "../../../utils/supabaseClient";
+import Link from "next/link";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -90,6 +91,12 @@ const Page = () => {
             サインアップ
           </a>
         </div>
+        <Link
+          href="/"
+          className="text-blue-500 underline hover:text-blue-600 transition duration-200 text-center block mt-4"
+        >
+          ホームへ戻る
+        </Link>
       </div>
     </div>
   );

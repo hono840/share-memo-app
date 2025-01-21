@@ -5,6 +5,13 @@ import MemoLists from "./organisms/MemoLists";
 import CreateMemo from "./organisms/CreateMemo";
 import Head1 from "./atoms/Head1";
 import Link from "next/link";
+import { supabase } from "../../utils/supabaseClient";
+
+// サインインしていたらコンソールにユーザー情報を表示
+supabase.auth.getUser().then(({ data: { user } }) => {
+  console.log('ログインしています')
+  console.log(user?.email);
+});
 
 const Page = () => {
   return (
