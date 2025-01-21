@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Head2 from "../atoms/Head2";
 import TextArea from "../atoms/TextArea";
 import PrimaryButton from "../atoms/PrimaryButton";
-import ErrorToast from "../atoms/ErrorToast";
 import SuccessToast from "../atoms/SuccessToast";
 import { supabase } from "../../../utils/supabaseClient";
 
@@ -22,13 +21,16 @@ const CreateMemo = () => {
       if (error) {
         console.error(error);
         setErrorMessage("メモの作成に失敗しました");
+        setTimeout(() => setErrorMessage(""), 3000);
         return;
       }
       setSuccessCreateMemo(true);
+      setTimeout(() => setSuccessCreateMemo(false), 3000);
       setTextValue("");
     } catch (err) {
       console.error(err);
       setErrorMessage("予期せぬエラーが発生しました");
+      setTimeout(() => setErrorMessage(""), 3000);
     }
   };
 
@@ -36,12 +38,8 @@ const CreateMemo = () => {
     e.preventDefault();
     setErrorMessage("");
     handleCreateMemo();
-    if (successCreateMemo) {
-      setTimeout(() => {
-        setSuccessCreateMemo(false);
-      }, 3000);
-    }
   };
+
   return (
     <section className="p-6 bg-gray-700 rounded-lg shadow-inner">
       <Head2>メモ作成</Head2>
