@@ -34,6 +34,7 @@ const MemoLists = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // メモ一覧を取得
   const loadMemos = async () => {
     try {
       setLoading(true);
@@ -68,6 +69,23 @@ const MemoLists = () => {
     };
   }, []);
 
+  // メモ削除
+  const deleteMemo = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("share-memo-app")
+        .delete()
+        .eq("id", id);
+      if (error) {
+        console.error(error.message);
+        return;
+      }
+      setMemos((prevMemos) => prevMemos.filter((memo) => memo.id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <section className="p-6 bg-gray-700 rounded-lg shadow-inner">
       <Head2>メモ一覧</Head2>
@@ -86,6 +104,7 @@ const MemoLists = () => {
             >
               {/* メモ情報 */}
               <div className="flex flex-col gap-1">
+                <span className="text-sm text-gray-300">投稿者：山田太郎</span>
                 <span className="text-sm text-gray-300">
                   投稿日時: {new Date(memo.created_at).toLocaleString()}
                 </span>
@@ -94,7 +113,7 @@ const MemoLists = () => {
               {/* 編集&削除ボタン */}
               <div className="flex gap-2">
                 <EditButton />
-                <DeleteButton />
+                <DeleteButton memoId={memo.id} onDelete={deleteMemo} />
               </div>
             </li>
           ))}
