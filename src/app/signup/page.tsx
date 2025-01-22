@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Head2 from "../atoms/Head2";
+import Head2 from "../components/atoms/Head2";
 import { supabase } from "../../../utils/supabaseClient";
 import Link from "next/link";
 
@@ -19,18 +19,21 @@ const Page = () => {
         email,
         password,
         options: {
-          data: { username, },
-        }
-      })
+          data: { username },
+        },
+      });
       if (error) {
         setMessage({ type: "error", text: error.message });
       } else {
-        setMessage({ type: "success", text: "サインアップに成功しました！確認メールをご確認ください。" });
+        setMessage({
+          type: "success",
+          text: "サインアップに成功しました！確認メールをご確認ください。",
+        });
       }
     } catch (err) {
       setMessage({ type: "error", text: "予期せぬエラーが発生しました。" });
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
@@ -39,8 +42,9 @@ const Page = () => {
         {/* メッセージ表示 */}
         {message.text && (
           <p
-            className={`text-sm mt-4 ${message.type === "success" ? "text-green-500" : "text-red-500"
-              }`}
+            className={`text-sm mt-4 ${
+              message.type === "success" ? "text-green-500" : "text-red-500"
+            }`}
           >
             {message.text}
           </p>

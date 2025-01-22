@@ -3,7 +3,7 @@ import Head2 from "../atoms/Head2";
 import TextArea from "../atoms/TextArea";
 import PrimaryButton from "../atoms/PrimaryButton";
 import SuccessToast from "../atoms/SuccessToast";
-import { supabase } from "../../../utils/supabaseClient";
+import { supabase } from "../../../../utils/supabaseClient";
 
 const CreateMemo = () => {
   const [textValue, setTextValue] = useState("");

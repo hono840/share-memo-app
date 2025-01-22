@@ -1,12 +1,11 @@
 "use client";
 
 import React from "react";
-import MemoLists from "./organisms/MemoLists";
-import CreateMemo from "./organisms/CreateMemo";
-import Head1 from "./atoms/Head1";
-
+import Head1 from "./components/atoms/Head1";
 import { useAuth } from "./context/AuthContext";
-import LinkButton from "./atoms/LinkButton";
+import LinkButton from "./components/atoms/LinkButton";
+import CreateMemo from "./components/organisms/CreateMemo";
+import MemoLists from "./components/organisms/MemoLists";
 
 const Page = () => {
   const { isLoggedIn } = useAuth();

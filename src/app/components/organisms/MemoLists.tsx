@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../../utils/supabaseClient";
 import Head2 from "../atoms/Head2";
 import EditButton from "../atoms/EditButton";
 import DeleteButton from "../atoms/DeleteButton";
+import { supabase } from "../../../../utils/supabaseClient";
 
 type Memo = {
   id: string;
