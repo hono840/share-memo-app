@@ -39,31 +39,29 @@ const Page = () => {
   }
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen pt-10">
-      <div className="max-w-3xl mx-auto flex flex-col">
-        <div className="flex flex-col">
-          <div className="w-full flex justify-between items-center py-4">
-            <Head1>Share Memo App</Head1>
-
-            {isLoggedIn ? (
-              <SignoutButton onClick={signout} />
-            ) : (
-              <div className="flex gap-4">
-                <LinkButton href="/signin" />
-                <LinkButton href="/signup" />
-              </div>
-            )}
-          </div>
-          <p className="mb-2">ようこそ{username}さん</p>
+    <div className="w-full max-w-3xl bg-gray-800 p-8 rounded-lg shadow-lg">
+      <div className="flex flex-col">
+        <div className="w-full flex justify-between items-center py-4">
+          <Head1>Share Memo App</Head1>
+          {isLoggedIn ? (
+            <SignoutButton onClick={signout} />
+          ) : (
+            <div className="flex gap-4">
+              <LinkButton href="/signin" />
+              <LinkButton href="/signup" />
+            </div>
+          )}
         </div>
-        <div className="w-full max-w-3xl mx-auto p-6 bg-gray-800 rounded-lg shadow-md flex flex-col gap-10">
-          {/* メモ作成エリア */}
-          <CreateMemo />
-          {/* メモ一覧エリア */}
-          <MemoLists />
-        </div>
+        <p className="mb-2">ようこそ{username}さん</p>
+      </div>
+      <div className="w-full py-6 bg-gray-800 rounded-lg shadow-sm flex flex-col gap-10">
+        {/* メモ作成エリア */}
+        <CreateMemo />
+        {/* メモ一覧エリア */}
+        <MemoLists />
       </div>
     </div>
+
   );
 };
 
