@@ -2,11 +2,13 @@
 import React, { useState } from "react";
 import { supabase } from "../../../utils/supabaseClient";
 import Link from "next/link";
+import { useAuth } from "../context/AuthContext";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState({ type: "", text: "" });
+  const { setLoggedIn } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,11 +22,13 @@ const Page = () => {
         setMessage({ type: "error", text: error.message });
       } else {
         setMessage({ type: "success", text: "サインインに成功しました！" });
+        setLoggedIn(true);
+        window.location.href = "/";
       }
     } catch (err) {
       setMessage({ type: "error", text: "予期せぬエラーが発生しました。" });
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
@@ -34,8 +38,9 @@ const Page = () => {
         </h1>
         {message.text && (
           <p
-            className={`text-sm mt-4 ${message.type === "success" ? "text-green-500" : "text-red-500"
-              }`}
+            className={`text-sm mt-4 ${
+              message.type === "success" ? "text-green-500" : "text-red-500"
+            }`}
           >
             {message.text}
           </p>
