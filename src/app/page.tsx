@@ -7,9 +7,10 @@ import LinkButton from "./components/atoms/LinkButton";
 import CreateMemo from "./components/organisms/CreateMemo";
 import MemoLists from "./components/organisms/MemoLists";
 import { supabase } from "../../utils/supabaseClient";
+import SignoutButton from "./components/atoms/SignoutButton";
 
 const Page = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, setLoggedIn } = useAuth();
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,6 +21,23 @@ const Page = () => {
     });
   }, []);
 
+  // サインアウト処理
+  const signout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("サインアウトエラー:", error.message);
+        alert("サインアウトに失敗しました。もう一度お試しください。");
+        return;
+      }
+      setLoggedIn(false);
+      window.location.href = "/";
+    } catch (err) {
+      console.log(err);
+      alert("予期せぬエラーが発生しました。");
+    }
+  }
+
   return (
     <div className="bg-gray-900 text-white min-h-screen pt-10">
       <div className="max-w-3xl mx-auto flex flex-col">
@@ -28,7 +46,7 @@ const Page = () => {
             <Head1>Share Memo App</Head1>
 
             {isLoggedIn ? (
-              <LinkButton href="/signout" />
+              <SignoutButton onClick={signout} />
             ) : (
               <div className="flex gap-4">
                 <LinkButton href="/signin" />
