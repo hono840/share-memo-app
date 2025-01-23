@@ -10,7 +10,7 @@ const Page = () => {
   const [message, setMessage] = useState({ type: "", text: "" });
   const { setLoggedIn } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const signin = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
     try {
@@ -37,13 +37,14 @@ const Page = () => {
       </h1>
       {message.text && (
         <p
-          className={`text-sm mt-4 ${message.type === "success" ? "text-green-500" : "text-red-500"
-            }`}
+          className={`text-sm mt-4 ${
+            message.type === "success" ? "text-green-500" : "text-red-500"
+          }`}
         >
           {message.text}
         </p>
       )}
-      <form className="space-y-6" onSubmit={handleSubmit}>
+      <form className="space-y-6" onSubmit={signin}>
         {/* Email Field */}
         <div>
           <label
@@ -101,7 +102,6 @@ const Page = () => {
         ホームへ戻る
       </Link>
     </div>
-
   );
 };
 
