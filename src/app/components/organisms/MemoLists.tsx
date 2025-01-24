@@ -10,6 +10,7 @@ type Memo = {
   id: string;
   contents: string;
   created_at: string;
+  user: string;
 };
 
 const fetchMemos = async () => {
@@ -104,7 +105,10 @@ const MemoLists = () => {
             >
               {/* メモ情報 */}
               <div className="flex flex-col gap-1">
-                <span className="text-sm text-gray-300">投稿者：山田太郎</span>
+                <span className="text-sm text-gray-300">
+                  投稿者：
+                  {memo.user ? memo.user : "名無し"}
+                </span>
                 <span className="text-sm text-gray-300">
                   投稿日時: {new Date(memo.created_at).toLocaleString()}
                 </span>

@@ -1,23 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head2 from "../atoms/Head2";
 import TextArea from "../atoms/TextArea";
 import PrimaryButton from "../atoms/PrimaryButton";
 import SuccessToast from "../atoms/SuccessToast";
 import { supabase } from "../../../../utils/supabaseClient";
+import { useAuth } from "@/app/context/AuthContext";
 
 const CreateMemo = () => {
   const [textValue, setTextValue] = useState("");
   const [successCreateMemo, setSuccessCreateMemo] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [userName, setUserName] = useState<string | null>(null);
   const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
   };
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      const user = data.session?.user;
+      const username = user?.user_metadata?.username;
+      setUserName(username);
+    });
+  }, []);
+
   const handleCreateMemo = async () => {
     try {
-      const { error } = await supabase
-        .from("share-memo-app")
-        .insert([{ contents: textValue }]);
+      const { error } = await supabase.from("share-memo-app").insert([
+        {
+          contents: textValue,
+          user: userName,
+        },
+      ]);
       if (error) {
         console.error(error);
         setErrorMessage("メモの作成に失敗しました");
