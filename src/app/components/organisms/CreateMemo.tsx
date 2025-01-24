@@ -4,7 +4,6 @@ import TextArea from "../atoms/TextArea";
 import PrimaryButton from "../atoms/PrimaryButton";
 import SuccessToast from "../atoms/SuccessToast";
 import { supabase } from "../../../../utils/supabaseClient";
-import { useAuth } from "@/app/context/AuthContext";
 
 const CreateMemo = () => {
   const [textValue, setTextValue] = useState("");

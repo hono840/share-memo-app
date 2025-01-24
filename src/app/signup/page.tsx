@@ -35,20 +35,20 @@ const Page = () => {
           text: "サインアップに成功しました！確認メールをご確認ください。",
         });
       }
-    } catch (err) {
+    } catch {
       setMessage({ type: "error", text: "予期せぬエラーが発生しました。" });
     }
   };
 
   return (
-
     <div className="w-full max-w-3xl bg-gray-800 p-8 rounded-lg shadow-lg">
       <Head2>サインアップ</Head2>
       {/* メッセージ表示 */}
       {message.text && (
         <p
-          className={`text-sm mt-4 ${message.type === "success" ? "text-green-500" : "text-red-500"
-            }`}
+          className={`text-sm mt-4 ${
+            message.type === "success" ? "text-green-500" : "text-red-500"
+          }`}
         >
           {message.text}
         </p>
@@ -107,7 +107,6 @@ const Page = () => {
         ホームへ戻る
       </Link>
     </div>
-
   );
 };
 

@@ -25,7 +25,7 @@ const Page = () => {
         setLoggedIn(true);
         window.location.href = "/";
       }
-    } catch (err) {
+    } catch {
       setMessage({ type: "error", text: "予期せぬエラーが発生しました。" });
     }
   };
